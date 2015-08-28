@@ -8,12 +8,12 @@ if ( ! function_exists('flash')) {
      * @param  string|null $message
      * @return \Laracasts\Flash\FlashNotifier
      */
-    function flash($message = null)
+    function flash($title =null, $message = null)
     {
         $notifier = app('flash');
 
-        if ( ! is_null($message)) {
-            return $notifier->info($message);
+        if ( ! func_num_args() == 0) {
+            return $notifier->info($title, $message);
         }
 
         return $notifier;

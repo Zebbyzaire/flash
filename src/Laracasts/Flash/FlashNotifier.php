@@ -25,9 +25,9 @@ class FlashNotifier
      *
      * @param string $message
      */
-    public function info($message)
+    public function info($title, $message)
     {
-        $this->message($message, 'info');
+        $this->message($title, $message, 'info');
 
         return $this;
     }
@@ -38,9 +38,9 @@ class FlashNotifier
      * @param  string $message
      * @return $this
      */
-    public function success($message)
+    public function success($title, $message)
     {
-        $this->message($message, 'success');
+        $this->message($title, $message, 'success');
 
         return $this;
     }
@@ -51,9 +51,9 @@ class FlashNotifier
      * @param  string $message
      * @return $this
      */
-    public function error($message)
+    public function error($title, $message)
     {
-        $this->message($message, 'danger');
+        $this->message($title, $message, 'danger');
 
         return $this;
     }
@@ -64,9 +64,9 @@ class FlashNotifier
      * @param  string $message
      * @return $this
      */
-    public function warning($message)
+    public function warning($title, $message)
     {
-        $this->message($message, 'warning');
+        $this->message($title, $message, 'warning');
 
         return $this;
     }
@@ -78,12 +78,11 @@ class FlashNotifier
      * @param  string $title
      * @return $this
      */
-    public function overlay($message, $title = 'Notice')
+    public function overlay($title, $message, $level)
     {
-        $this->message($message, 'info', $title);
+        $this->message($title, $message, $level);
 
         $this->session->flash('flash_notification.overlay', true);
-        $this->session->flash('flash_notification.title', $title);
 
         return $this;
     }
@@ -95,8 +94,9 @@ class FlashNotifier
      * @param  string $level
      * @return $this
      */
-    public function message($message, $level = 'info')
+    public function message($title, $message, $level)
     {
+        $this->session->flash('flash_notification.title', $title);
         $this->session->flash('flash_notification.message', $message);
         $this->session->flash('flash_notification.level', $level);
 
@@ -108,7 +108,7 @@ class FlashNotifier
      *
      * @return $this
      */
-    public function important()
+    public function imptant()
     {
         $this->session->flash('flash_notification.important', true);
 
